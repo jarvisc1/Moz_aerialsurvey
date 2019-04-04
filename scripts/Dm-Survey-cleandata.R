@@ -38,13 +38,13 @@ survey$y_utm <- st_coordinates(survey)[,2]
 
 # Calculate if within 2km of river or roads
 
-within_2km_road <- st_is_within_distance(survey, roads,  dist = 2000)
-within_2km_river <- st_is_within_distance(survey, rivers,  dist = 2000)
+within_1km_road <- st_is_within_distance(survey, roads,  dist = 1000)
+within_1km_river <- st_is_within_distance(survey, rivers,  dist = 1000)
 
-survey$within_2km_road <-  ifelse(apply(within_2km_road, 1, sum)>0, 1,0)
-survey$within_2km_river <-  ifelse(apply(within_2km_river, 1, sum)>0, 1,0)
-survey$within_2km_river_road <-  survey$within_2km_river+survey$within_2km_road
-survey$within_2km_river_road_bin <-  (survey$within_2km_river_road >0)
+survey$within_1km_road <-  ifelse(apply(within_1km_road, 1, sum)>0, 1,0)
+survey$within_1km_river <-  ifelse(apply(within_1km_river, 1, sum)>0, 1,0)
+survey$within_1km_river_road <-  survey$within_1km_river + survey$within_1km_road
+survey$within_1km_river_road_bin <-  (survey$within_1km_river_road >0)
 
 saveRDS(survey, "data/survey.Rds")
 
